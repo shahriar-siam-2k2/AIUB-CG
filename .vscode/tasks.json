@@ -1,0 +1,44 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "java (build)",
+			"paths": [
+				"${workspace}"
+			],
+			"isFullBuild": true,
+			"group": "build",
+			"problemMatcher": [],
+			"label": "java (build): Build Workspace",
+			"detail": "$(tools) Build all the Java projects in workspace."
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++.exe build active file",
+			"command": "H:\\CodeBlocks\\MinGW\\bin\\gcc.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-I", "H:/CodeBlocks/MinGW/x86_64-w64-mingw32/include",
+                "-L", "H:/CodeBlocks/MinGW/x86_64-w64-mingw32/lib",
+                "-lfreeglut",
+                "-lopengl32",
+                "-lglu32"
+			],
+			"options": {
+				"cwd": "H:\\CodeBlocks\\MinGW\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: H:\\CodeBlocks\\MinGW\\bin\\g++.exe"
+		}
+	]
+}
