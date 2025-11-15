@@ -1,132 +1,120 @@
 #include <windows.h>
 #include <GL/glut.h>
-#include <math.h>
 
-#ifndef M_PI
-#define M_PI 3.1416
-#endif
+void vase(float x, float y, float s) {
 
-void drawFlower(float x, float y, float r, float g, float b, float scale) {
-    int numPetals = 5;
-    
-    glPushMatrix();
-    
-    glTranslatef(x, y, 0.0f);
-    glScalef(scale, scale, 1.0f);
+    //vase - upper part
 
-    glColor3f(r, g, b);
-    for (int i = 0; i < numPetals; i++) {
-        glPushMatrix();
-        glRotatef((360.0 / numPetals) * i, 0.0, 0.0, 1.0);
+    glColor3f(0.89412f, 0.50980f, 0.95294f);
+
+    glBegin(GL_QUADS);
+        glVertex2f(x-0.10f*s, y+0.00f*s); //D
+        glVertex2f(x-0.07f*s, y-0.04f*s); //F
+        glVertex2f(x+0.08f*s, y-0.04f*s); //Q
+        glVertex2f(x+0.10f*s, y-0.00f*s); //E
+
+        glVertex2f(x-0.07f*s, y-0.04f*s); //F
+        glVertex2f(x-0.06f*s, y-0.07f*s); //G
+        glVertex2f(x+0.07f*s, y-0.07f*s); //P
+        glVertex2f(x+0.08f*s, y-0.04f*s); //Q
+
+        glVertex2f(x-0.06f*s, y-0.07f*s); //G
+        glVertex2f(x-0.08f*s, y-0.11f*s); //R
+        glVertex2f(x+0.08f*s, y-0.11f*s); //S
+        glVertex2f(x+0.07f*s, y-0.07f*s); //P
+
+        glVertex2f(x-0.08f*s, y-0.11f*s); //R
+        glVertex2f(x-0.10f*s, y-0.13f*s); //H
+        glVertex2f(x+0.10f*s, y-0.13f*s); //O
+        glVertex2f(x+0.08f*s, y-0.11f*s); //S
+
+        glVertex2f(x-0.10f*s, y-0.13f*s); //H
+        glVertex2f(x-0.15f*s, y-0.20f*s); //I
+        glVertex2f(x+0.15f*s, y-0.20f*s); //N
+        glVertex2f(x+0.10f*s, y-0.13f*s); //O
+
+        glVertex2f(x-0.15f*s, y-0.20f*s); //I
+        glVertex2f(x-0.12f*s, y-0.22f*s); //Z8
+        glVertex2f(x-0.08f*s, y-0.24f*s); //A9
+        glVertex2f(x+0.15f*s, y-0.20f*s); //N
+
+        glVertex2f(x+0.15f*s, y-0.20f*s); //N
+        glVertex2f(x-0.08f*s, y-0.24f*s); //A9
+        glVertex2f(x-0.04f*s, y-0.25f*s); //B9
+        glVertex2f(x-0.00f*s, y-0.25f*s); //F9
         
-        glBegin(GL_POLYGON);
-            glVertex2f(0.0, 0.0);
-            glVertex2f(0.2, 0.4);
-            glVertex2f(0.0, 0.8);
-            glVertex2f(-0.2, 0.4);
-        glEnd();
-        
-        glPopMatrix();
-    }
-
-    glColor3f(0.9f, 0.7f, 0.2f);
-    glBegin(GL_POLYGON);
-    for (int i = 0; i < 16; i++) {
-        float angle = 2.0 * M_PI * i / 16.0;
-        glVertex2f(cos(angle) * 0.2, sin(angle) * 0.2);
-    }
+        glVertex2f(x-0.00f*s, y-0.25f*s); //F9
+        glVertex2f(x+0.04f*s, y-0.25f*s); //C9
+        glVertex2f(x+0.08f*s, y-0.24f*s); //D9
+        glVertex2f(x+0.15f*s, y-0.20f*s); //N
     glEnd();
     
-    glPopMatrix();
-}
+    //vase - Lower Part
 
-void drawLeaf(float x1, float y1, float x2, float y2, float x3, float y3) {
-    glColor3f(0.0f, 0.5f, 0.2f);
-    glBegin(GL_POLYGON);
-        glVertex2f(x1, y1);
-        glVertex2f(x2, y2);
-        glVertex2f(x3, y3);
+    glColor3f(0.74118f, 0.33725f, 0.89804f);
+
+    glBegin(GL_QUADS);
+        glVertex2f(x-0.15f*s, y-0.20f*s); //I
+        glVertex2f(x-0.12f*s, y-0.22f*s); //Z8
+        glVertex2f(x-0.08f*s, y-0.24f*s); //A9
+        glVertex2f(x-0.15f*s, y-0.27f*s); //J
+
+        glVertex2f(x-0.15f*s, y-0.27f*s); //J
+        glVertex2f(x-0.08f*s, y-0.24f*s); //A9
+        glVertex2f(x-0.04f*s, y-0.25f*s); //B9
+        glVertex2f(x-0.00f*s, y-0.27f*s); //E9
+
+        glVertex2f(x-0.00f*s, y-0.27f*s); //E9
+        glVertex2f(x-0.04f*s, y-0.25f*s); //B9
+        glVertex2f(x+0.04f*s, y-0.25f*s); //C9
+        glVertex2f(x+0.15f*s, y-0.27f*s); //M
+
+        glVertex2f(x+0.15f*s, y-0.20f*s); //N
+        glVertex2f(x+0.08f*s, y-0.24f*s); //D9
+        glVertex2f(x+0.04f*s, y-0.25f*s); //C9
+        glVertex2f(x+0.15f*s, y-0.27f*s); //M
+
+        glVertex2f(x-0.15f*s, y-0.27f*s); //J
+        glVertex2f(x-0.10f*s, y-0.37f*s); //K
+        glVertex2f(x+0.10f*s, y-0.37f*s); //L
+        glVertex2f(x+0.15f*s, y-0.27f*s); //M
     glEnd();
+
+    //trunk
+
+    glColor3f(0.18431f, 0.12941f, 0.60392f);
+
+    glBegin(GL_QUADS);
+
+        glVertex2f(x-0.01f*s, y+0.00f*s); //T
+        glVertex2f(x-0.01f*s, y+0.28f*s); //U
+        glVertex2f(x+0.01f*s, y+0.28f*s); //V
+        glVertex2f(x+0.01f*s, y+0.00f*s); //W
+
+    glEnd();
+
+    glFlush();
+
 }
 
 void display() {
+
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor3f(0.70f, 0.48f, 0.88f);
-    glBegin(GL_POLYGON);
-        glVertex2f(0.0, -2.5);
-        glVertex2f(0.7, -2.5);
-        glVertex2f(1.0, -1.8);
-        glVertex2f(0.6, -0.8);
-        glVertex2f(0.0, -0.8);
-    glEnd();
+    vase(0.0f, 0.0f, 2);
 
-    glColor3f(0.82f, 0.62f, 0.94f);
-    glBegin(GL_POLYGON);
-        glVertex2f(0.0, -2.5);
-        glVertex2f(-0.7, -2.5);
-        glVertex2f(-1.0, -1.8);
-        glVertex2f(-0.6, -0.8);
-        glVertex2f(0.0, -0.8);
-    glEnd();
+    glFlush();
 
-    glColor3f(0.0f, 0.5f, 0.2f);
-    glLineWidth(4.0f);
-    
-    glBegin(GL_LINES);
-        glVertex2f(0.0, -0.8);
-        glVertex2f(0.0, 1.2);
-        
-        glVertex2f(0.0, -0.8);
-        glVertex2f(-1.0, 1.0);
-        
-        glVertex2f(0.0, -0.8);
-        glVertex2f(1.0, 1.0);
-        
-        glVertex2f(0.0, -0.8);
-        glVertex2f(-1.5, 0.4);
-        
-        glVertex2f(0.0, -0.8);
-        glVertex2f(1.5, 0.4);
-    glEnd();
-    glLineWidth(1.0f);
-
-    drawLeaf(-0.2, 0.0, -0.8, 0.5, -0.4, 0.2);
-    drawLeaf(0.2, 0.0, 0.8, 0.5, 0.4, 0.2);
-    drawLeaf(-0.1, 0.5, -0.5, 0.8, -0.2, 0.6);
-
-    drawFlower(0.0, 1.5, 1.0f, 0.41f, 0.70f, 0.8f);
-    drawFlower(-1.0, 1.2, 0.8f, 0.6f, 1.0f, 0.7f);
-    drawFlower(1.0, 1.2, 1.0f, 0.41f, 0.70f, 0.7f);
-    drawFlower(-1.6, 0.5, 1.0f, 0.25f, 0.5f, 0.6f);
-    drawFlower(1.6, 0.5, 1.0f, 0.25f, 0.5f, 0.6f);
-
-    glutSwapBuffers();
 }
 
 int main(int argc, char** argv) {
+
     glutInit(&argc, argv);
-    
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); 
-    
-    glutInitWindowSize(320, 320);
-    glutCreateWindow("Flowers in a Vase");
-    
-    glClearColor(0.94f, 0.925f, 0.898f, 1.0f); 
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    
-    gluOrtho2D(-3.0, 3.0, -3.0, 3.0); 
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    
+    glutInitWindowSize(700, 700);
+    glutCreateWindow("CG_LT_2_O_T-01 | Vase");
     glutDisplayFunc(display);
-    
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    glutMainLoop(); 
+    glutMainLoop();
     return 0;
+
 }
