@@ -8,16 +8,16 @@ float PIE = 3.1416f;
 void fanBlades(float fanSize) {
 
     glPushMatrix();
-        glRotatef(ROTATION, 0.0f, 0.0f, 1.0f); 
+        glRotatef(ROTATION, 0.0f, 0.0f, 1.0f);
 
         // blades
         glColor3ub(200, 200, 255);
         for (int i = 0; i < 3; i++) {
 
             glPushMatrix();
-                glRotatef(i * 120.0f, 0.0f, 0.0f, 1.0f); 
+                glRotatef(i * 120.0f, 0.0f, 0.0f, 1.0f);
 
-                glBegin(GL_QUADS); 
+                glBegin(GL_QUADS);
                     glVertex2f(0.05f * fanSize, -0.05f * fanSize); // M
                     glVertex2f(0.3f * fanSize, -0.05f * fanSize); // L
                     glVertex2f(0.3f * fanSize, 0.05f * fanSize); // K
@@ -68,13 +68,12 @@ void fan(float x, float y, float standSize, float fanSize) {
                 glVertex2f(xx, yy);
             }
         glEnd();
-
         fanBlades(fanSize);
     glPopMatrix();
 }
 
 void update(int value) {
-    
+
     ROTATION -= 5.0f;
 
     if(ROTATION < -360.0) {
@@ -96,7 +95,7 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
 
     fan(0.0f, 0.1f, 0.35f, 1.0f);
-    
+
     glutSwapBuffers();
 
 }
@@ -104,13 +103,13 @@ void display() {
 int main(int argc, char** argv) {
 
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); 
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(500, 500);
     glutCreateWindow("CG_LT_3_O_T-02_Fan (ON)");
     glutDisplayFunc(display);
-    gluOrtho2D(-1, 1, -1, 1); 
-    glutTimerFunc(15, update, 0); 
+    gluOrtho2D(-1, 1, -1, 1);
+    glutTimerFunc(15, update, 0);
     glutMainLoop();
     return 0;
-    
+
 }
