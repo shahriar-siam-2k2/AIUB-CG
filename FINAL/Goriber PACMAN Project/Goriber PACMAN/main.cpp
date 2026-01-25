@@ -169,9 +169,15 @@ void resetGame() {
     gameWon = false;
     gamePaused = false;
     
-    if (currentLevel == 1) ghostSpeed = 0.04f;      
-    else if (currentLevel == 2) ghostSpeed = 0.06f; 
-    else ghostSpeed = 0.085f;                       
+    if (currentLevel == 1) {
+        ghostSpeed = 0.04f;
+    }      
+    else if (currentLevel == 2) {
+        ghostSpeed = 0.06f; 
+    }
+    else {
+        ghostSpeed = 0.085f;
+    }                   
 
     initializeGame(currentLevel); 
 
@@ -233,7 +239,8 @@ void drawScore(float x, float y, int value) {
     char buffer[20];
     if (value == 0) {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, '0');
-    } else {
+    }
+    else {
         int i = 0;
         int temp = value;
         while (temp > 0) {
@@ -270,7 +277,8 @@ void update(int value) {
         if (mouthOpen) {
             mouthAngle += 5.0f;
             if (mouthAngle >= 45.0f) mouthOpen = false;
-        } else {
+        }
+        else {
             mouthAngle -= 5.0f;
             if (mouthAngle <= 0.0f) mouthOpen = true;
         }
@@ -311,7 +319,9 @@ void update(int value) {
                 for(int j=0; j<foodNums; j++) {
                     if(foods[j].active) { allEaten = false; break; }
                 }
-                if (allEaten) { gameWon = true; gameOver = true; }
+                if (allEaten) {
+                    gameWon = true; gameOver = true;
+                }
             }
         }
     }
@@ -349,7 +359,8 @@ void update(int value) {
                     int randIdx = randomGenerator() % count;
                     ghosts[i].dirX = validDirs[randIdx][0];
                     ghosts[i].dirY = validDirs[randIdx][1];
-                } else {
+                }
+                else {
                     ghosts[i].dirX = -ghosts[i].dirX;
                     ghosts[i].dirY = -ghosts[i].dirY;
                 }
@@ -364,8 +375,8 @@ void update(int value) {
             ghosts[i].startY = finalY;
         }
         else {
-             ghosts[i].startX = round(ghosts[i].startX);
-             ghosts[i].startY = round(ghosts[i].startY);
+            ghosts[i].startX = round(ghosts[i].startX);
+            ghosts[i].startY = round(ghosts[i].startY);
         }
 
         float dx = pacman.startX - ghosts[i].startX;
@@ -387,7 +398,7 @@ void display() {
     glShadeModel(GL_SMOOTH); 
 
     GLfloat light0_position[] = { pacman.startX + 0.5f, pacman.startY + 0.5f, 2.0f, 1.0f };
-    GLfloat ambient[] = { 0.1f, 0.1f, 0.1f, 1.0f };  
+    GLfloat ambient[] = { 0.01f, 0.01f, 0.01f, 1.0f };  
     GLfloat diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };  
     
     glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
@@ -403,7 +414,7 @@ void display() {
     glTranslatef(0.0f, 0.0f, 0.0f);
     
     for (int i = 0; i < wallNums; i++) {
-        drawRectangle(walls[i].startX, walls[i].startY, walls[i].width, walls[i].height, 0.1f, 0.1f, 0.6f); 
+        drawRectangle(walls[i].startX, walls[i].startY, walls[i].width, walls[i].height, 0.5f, 0.5f, 0.5f); 
     }
     drawRectangle(12.5f, 8.85f, 2.0f, 0.1f, 1.0f, 0.7f, 0.8f); 
 
@@ -495,13 +506,16 @@ void display() {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glRectf(COLS/2 - 5, 5, COLS/2 + 5, 10);
         glDisable(GL_BLEND);
+
         if (gameWon) {
             glColor3f(0.0f, 1.0f, 0.0f);
             drawText(COLS/2 - 1.5f, 9.0f, "YOU WIN!");
-        } else {
+        }
+        else {
             glColor3f(1.0f, 0.0f, 0.0f);
             drawText(COLS/2 - 2.0f, 9.0f, "GAME OVER");
         }
+
         glColor3f(1.0f, 1.0f, 1.0f);
         drawText(COLS/2 - 4.0f, 7.5f, "Press [R] to Restart Level");
         drawText(COLS/2 - 4.0f, 6.5f, "Press [M] for Menu");
@@ -524,11 +538,13 @@ void keyboard(unsigned char key, int x, int y) {
             currentLevel = 1;
             resetGame();
             gameStarted = true;
-        } else if (key == '2') {
+        }
+        else if (key == '2') {
             currentLevel = 2;
             resetGame();
             gameStarted = true;
-        } else if (key == '3') {
+        }
+        else if (key == '3') {
             currentLevel = 3;
             resetGame();
             gameStarted = true;
@@ -537,22 +553,37 @@ void keyboard(unsigned char key, int x, int y) {
     }
 
     if (gameStarted) {
-        if (key == 'f' || key == 'F') gamePaused = !gamePaused;
+        if (key == 'f' || key == 'F') {
+            gamePaused = !gamePaused;
+        }
         
         if (gameOver) {
             if (key == 'r' || key == 'R') {
                 resetGame(); 
-            } else if (key == 'm' || key == 'M') {
+            }
+            else if (key == 'm' || key == 'M') {
                 gameStarted = false; 
             }
         }
 
         if (!gameOver && !gamePaused) {
             switch (key) {
-                case 'w': case 'W': pacman.dirX = 0; pacman.dirY = 1; break;
-                case 's': case 'S': pacman.dirX = 0; pacman.dirY = -1; break;
-                case 'a': case 'A': pacman.dirX = -1; pacman.dirY = 0; break;
-                case 'd': case 'D': pacman.dirX = 1; pacman.dirY = 0; break;
+                case 'w': case 'W': 
+                    pacman.dirX = 0;
+                    pacman.dirY = 1;
+                    break;
+                case 's': case 'S':
+                    pacman.dirX = 0;
+                    pacman.dirY = -1;
+                    break;
+                case 'a': case 'A': 
+                    pacman.dirX = -1;
+                    pacman.dirY = 0;
+                    break;
+                case 'd': case 'D':
+                    pacman.dirX = 1;
+                    pacman.dirY = 0;
+                    break;
             }
         }
     }
@@ -565,7 +596,7 @@ int main(int argc, char** argv) {
     glutCreateWindow("Goriber PACMAN");
     
     startRandom(time(0)); 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 
+    glClearColor(0.0f, 0.0f, 0.2f, 1.0f); 
     
     glEnable(GL_DEPTH_TEST);
 
