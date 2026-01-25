@@ -3,14 +3,14 @@
         {
             "name": "Win32",
             "includePath": [
-                "H:\\CodeBlocks\\MinGW\\x86_64-w64-mingw32\\include"
+                "G:\\CodeBlocks\\MinGW\\x86_64-w64-mingw32\\include"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "H:\\CodeBlocks\\MinGW\\bin\\g++.exe",
+            "compilerPath": "G:\\CodeBlocks\\MinGW\\bin\\g++.exe",
             "cStandard": "c11",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "windows-gcc-x86"
